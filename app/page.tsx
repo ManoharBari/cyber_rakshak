@@ -79,7 +79,7 @@ export default function Home() {
       <section className="py-16 sm:py-24 bg-slate-950 border-t border-slate-800/50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl sm:text-5xl font-bold text-white">Why Choose CyberAid?</h2>
+            <h2 className="text-4xl sm:text-5xl font-bold text-white">Why Choose CyberRakshak?</h2>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
               Everything you need to report and manage cybersecurity incidents with confidence
             </p>
@@ -199,7 +199,7 @@ export default function Home() {
         <div className="relative max-w-4xl mx-auto px-4 text-center space-y-8">
           <h2 className="text-4xl sm:text-5xl font-bold text-white">Ready to secure your digital world?</h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Join thousands of organizations protecting themselves with CyberAid. Report incidents, get expert help, and
+            Join thousands of organizations protecting themselves with CyberRakshak. Report incidents, get expert help, and
             respond faster than ever before.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

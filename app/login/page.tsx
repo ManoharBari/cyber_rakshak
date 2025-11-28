@@ -67,7 +67,7 @@ export default function LoginPage() {
                   <ShieldAlert className="w-6 h-6 text-cyan-400" />
                 </div>
               </div>
-              <h1 className="text-3xl font-bold text-white">Welcome to CyberAid</h1>
+              <h1 className="text-3xl font-bold text-white">Welcome to CyberRakshak</h1>
               <p className="text-slate-400">Sign in to your account</p>
             </div>
 
@@ -124,7 +124,7 @@ export default function LoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder={role === "user" ? "user@cyberaid.com" : "officer@cyberaid.com"}
+                  placeholder={role === "user" ? "user@CyberRakshak.com" : "officer@CyberRakshak.com"}
                   required
                   className="w-full bg-slate-700/50 border border-slate-600/50 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                 />
@@ -185,7 +185,7 @@ export default function LoginPage() {
             <div className="border-t border-slate-700/50 pt-4 space-y-2">
               <p className="text-xs text-slate-500 text-center">Demo Credentials:</p>
               <p className="text-xs text-slate-500 text-center">
-                {role === "user" ? "user@cyberaid.com / password123" : "officer@cyberaid.com / officer123"}
+                {role === "user" ? "user@CyberRakshak.com / password123" : "officer@CyberRakshak.com / officer123"}
               </p>
             </div>
           </div>

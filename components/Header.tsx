@@ -17,12 +17,12 @@ export default function Header() {
           <div className="relative w-10 h-10">
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-violet-500 rounded-lg blur opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110" />
             <div className="relative w-10 h-10 bg-gradient-to-br from-cyan-400 to-violet-500 rounded-lg flex items-center justify-center text-slate-950 font-bold text-lg group-hover:shadow-lg group-hover:shadow-cyan-400/50 transition-all duration-300">
-              IG
+              CR
             </div>
           </div>
           <div className="hidden sm:flex flex-col">
             <span className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
-              CyberAid
+              CyberRakshak
             </span>
             <span className="text-xs text-cyan-400/60 font-medium">Incident Response</span>
           </div>
@@ -44,7 +44,7 @@ export default function Header() {
                 For Teams
               </Link>
               <a
-                href="#resources"
+                href="/resources"
                 className="px-4 py-2 text-slate-300 hover:text-cyan-400 font-medium transition-all duration-200 hover:bg-cyan-400/10 rounded-lg"
               >
                 Resources
