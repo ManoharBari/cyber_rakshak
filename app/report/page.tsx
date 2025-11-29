@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import AiAssessmentResult from "@/components/AiAssessmentResult";
 import { useAuth } from "@/lib/auth-context";
 import { useRouter } from "next/navigation";
+import { BellRing, Search, Zap } from "lucide-react";
 
 interface IncidentFormData {
   fullName: string;
@@ -192,7 +193,9 @@ export default function ReportIncidentPage(): ReactElement {
         setAiAssessmentData({
           priority: result.data.assessment.label || "medium",
           impactScore: result.data.assessment.impactScore || 65,
-          summary: result.data.assessment.summary || "Your incident has been analyzed.",
+          summary:
+            result.data.assessment.summary ||
+            "Your incident has been analyzed.",
           actions: result.data.assessment.actions || [],
           incidentId: result.data.incidentId || "INC01",
         });
@@ -861,19 +864,19 @@ export default function ReportIncidentPage(): ReactElement {
           <div className="grid md:grid-cols-3 gap-4">
             {[
               {
-                icon: "🔍",
+                icon: <Search />,
                 title: "AI Assessment",
                 description:
                   "Your incident is instantly analyzed by our AI engine for severity and impact.",
               },
               {
-                icon: "⚡",
+                icon: <Zap />,
                 title: "Priority Routing",
                 description:
                   "Automatically routed to the right team based on incident type and severity.",
               },
               {
-                icon: "🔔",
+                icon: <BellRing />,
                 title: "Live Tracking",
                 description:
                   "Receive real-time notifications as your incident moves through resolution.",

@@ -104,7 +104,7 @@ export default function AiAssessmentResult({
               }}
               className="text-4xl"
             >
-              <Bot />
+              <Bot size={30}/>
             </motion.div>
           </div>
 
