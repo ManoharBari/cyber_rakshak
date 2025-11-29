@@ -1535,49 +1535,19 @@ export default function OfficerDashboardPage() {
             </div>
 
             <div className="p-6 space-y-4">
-              <div>
-                <label className="block text-sm font-semibold mb-2">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  value={editForm.title}
-                  onChange={(e) =>
-                    setEditForm({ ...editForm, title: e.target.value })
-                  }
-                  className="w-full px-3 py-2 bg-background border border-border rounded-lg focus:outline-none focus:border-primary"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold mb-2">
-                  Description
-                </label>
-                <textarea
-                  value={editForm.description}
-                  onChange={(e) =>
-                    setEditForm({ ...editForm, description: e.target.value })
-                  }
-                  className="w-full px-3 py-2 bg-background border border-border rounded-lg focus:outline-none focus:border-primary h-24"
-                />
-              </div>
-
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold mb-2">
-                    Priority
+                    Assigned To
                   </label>
-                  <select
-                    value={editForm.priority}
+                  <input
+                    type="text"
+                    value={editForm.assignedTo || ""}
                     onChange={(e) =>
-                      setEditForm({ ...editForm, priority: e.target.value })
+                      setEditForm({ ...editForm, assignedTo: e.target.value })
                     }
                     className="w-full px-3 py-2 bg-background border border-border rounded-lg focus:outline-none focus:border-primary"
-                  >
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                  </select>
+                  />
                 </div>
 
                 <div>
@@ -1597,33 +1567,6 @@ export default function OfficerDashboardPage() {
                     <option value="closed">Closed</option>
                   </select>
                 </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold mb-2">
-                  Assigned To
-                </label>
-                <input
-                  type="text"
-                  value={editForm.assignedTo || ""}
-                  onChange={(e) =>
-                    setEditForm({ ...editForm, assignedTo: e.target.value })
-                  }
-                  className="w-full px-3 py-2 bg-background border border-border rounded-lg focus:outline-none focus:border-primary"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold mb-2">
-                  AI Summary
-                </label>
-                <textarea
-                  value={editForm.aiSummary}
-                  onChange={(e) =>
-                    setEditForm({ ...editForm, aiSummary: e.target.value })
-                  }
-                  className="w-full px-3 py-2 bg-background border border-border rounded-lg focus:outline-none focus:border-primary h-20"
-                />
               </div>
 
               <div className="flex gap-3 pt-4">

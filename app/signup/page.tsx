@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { useAuth } from "@/lib/auth-context"
-import { ShieldAlert, CheckCircle } from "lucide-react"
+import { ShieldAlert, CheckCircle, Shield } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function SignupPage() {
@@ -85,7 +85,7 @@ export default function SignupPage() {
           <div className="text-center space-y-3">
             <div className="flex justify-center">
               <div className="bg-gradient-to-br from-cyan-500/20 to-violet-500/20 p-3 rounded-xl">
-                <ShieldAlert className="w-6 h-6 text-cyan-400" />
+                <Shield className="w-6 h-6 text-cyan-400" />
               </div>
             </div>
             <h1 className="text-3xl font-bold text-white">Join CyberRakshak</h1>

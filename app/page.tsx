@@ -1,4 +1,5 @@
-import Link from "next/link"
+import { Bot, Headset, Lock, Satellite } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -26,8 +27,9 @@ export default function Home() {
                 </h1>
               </div>
               <p className="text-lg text-gray-300 leading-relaxed max-w-xl">
-                A secure platform connecting victims and cybersecurity experts. AI-powered priority detection for faster
-                response to security incidents.
+                A secure platform connecting victims and cybersecurity experts.
+                AI-powered priority detection for faster response to security
+                incidents.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Link href="/report">
@@ -56,16 +58,28 @@ export default function Home() {
                   </div>
                   <div className="space-y-4">
                     <div className="border-l-2 border-cyan-400 pl-4 py-2">
-                      <p className="text-cyan-400 font-mono text-sm">Incident Status: Active</p>
-                      <p className="text-gray-400 font-mono text-xs mt-1">Priority: HIGH</p>
+                      <p className="text-cyan-400 font-mono text-sm">
+                        Incident Status: Active
+                      </p>
+                      <p className="text-gray-400 font-mono text-xs mt-1">
+                        Priority: HIGH
+                      </p>
                     </div>
                     <div className="border-l-2 border-violet-400 pl-4 py-2">
-                      <p className="text-violet-400 font-mono text-sm">AI Assessment: In Progress</p>
-                      <p className="text-gray-400 font-mono text-xs mt-1">Confidence: 94%</p>
+                      <p className="text-violet-400 font-mono text-sm">
+                        AI Assessment: In Progress
+                      </p>
+                      <p className="text-gray-400 font-mono text-xs mt-1">
+                        Confidence: 94%
+                      </p>
                     </div>
                     <div className="border-l-2 border-green-400 pl-4 py-2">
-                      <p className="text-green-400 font-mono text-sm">Team Assigned: Security Ops</p>
-                      <p className="text-gray-400 font-mono text-xs mt-1">ETA: 2 min</p>
+                      <p className="text-green-400 font-mono text-sm">
+                        Team Assigned: Security Ops
+                      </p>
+                      <p className="text-gray-400 font-mono text-xs mt-1">
+                        ETA: 2 min
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -79,9 +93,12 @@ export default function Home() {
       <section className="py-16 sm:py-24 bg-slate-950 border-t border-slate-800/50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl sm:text-5xl font-bold text-white">Why Choose CyberRakshak?</h2>
+            <h2 className="text-4xl sm:text-5xl font-bold text-white">
+              Why Choose CyberRakshak?
+            </h2>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-              Everything you need to report and manage cybersecurity incidents with confidence
+              Everything you need to report and manage cybersecurity incidents
+              with confidence
             </p>
           </div>
 
@@ -89,23 +106,27 @@ export default function Home() {
             {[
               {
                 title: "AI-Powered Assessment",
-                description: "Get instant priority scoring and threat analysis for every incident.",
-                icon: "🤖",
+                description:
+                  "Get instant priority scoring and threat analysis for every incident.",
+                icon: <Bot />,
               },
               {
                 title: "Secure & Anonymous",
-                description: "Report safely with end-to-end encryption and optional anonymity.",
-                icon: "🔒",
+                description:
+                  "Report safely with end-to-end encryption and optional anonymity.",
+                icon: <Lock />,
               },
               {
                 title: "Real-Time Tracking",
-                description: "Monitor incident status and response progress in real-time.",
-                icon: "📡",
+                description:
+                  "Monitor incident status and response progress in real-time.",
+                icon: <Satellite />,
               },
               {
                 title: "Expert Support",
-                description: "Connect with certified cybersecurity professionals immediately.",
-                icon: "👨‍💼",
+                description:
+                  "Connect with certified cybersecurity professionals immediately.",
+                icon: <Headset />,
               },
             ].map((feature, i) => (
               <div
@@ -115,8 +136,12 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-violet-500/5 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity"></div>
                 <div className="relative space-y-3">
                   <p className="text-4xl">{feature.icon}</p>
-                  <h3 className="text-lg font-semibold text-white">{feature.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{feature.description}</p>
+                  <h3 className="text-lg font-semibold text-white">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
               </div>
             ))}
@@ -128,62 +153,52 @@ export default function Home() {
       <section className="py-16 sm:py-24 bg-gradient-to-b from-slate-950 to-[#0a0f1f]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl sm:text-5xl font-bold text-white">How It Works</h2>
+            <h2 className="text-4xl sm:text-5xl font-bold text-white">
+              How It Works
+            </h2>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-              Three simple steps to get professional help with your cybersecurity incident
+              Three simple steps to get professional help with your
+              cybersecurity incident
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                step: "01",
+                step: "1",
                 title: "Submit Report",
-                description: "Provide incident details through our secure form or our mobile app.",
+                description:
+                  "Provide incident details through our secure form or our mobile app.",
               },
               {
-                step: "02",
+                step: "2",
                 title: "AI Analyzes",
-                description: "Our AI engine prioritizes your incident and assigns severity level.",
+                description:
+                  "Our AI engine prioritizes your incident and assigns severity level.",
               },
               {
-                step: "03",
+                step: "3",
                 title: "Team Responds",
-                description: "Certified security professionals are assigned to help you.",
+                description:
+                  "Certified security professionals are assigned to help you.",
               },
             ].map((item, i) => (
               <div key={i} className="relative">
                 <div className="flex flex-col items-center text-center">
                   <div className="mb-6 relative">
                     <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-violet-600 flex items-center justify-center">
-                      <span className="text-2xl font-bold text-white">{item.step}</span>
+                      <span className="text-2xl font-bold text-white">
+                        {item.step}
+                      </span>
                     </div>
-                    {i < 2 && (
-                      <div className="hidden md:block absolute top-8 -right-14 w-28 h-1 bg-gradient-to-r from-cyan-500 to-violet-600"></div>
-                    )}
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{item.description}</p>
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-12 sm:py-16 bg-slate-900 border-y border-slate-800/50">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { label: "Response Time", value: "< 5 min" },
-              { label: "Incidents Resolved", value: "10K+" },
-              { label: "Active Users", value: "50K+" },
-              { label: "Success Rate", value: "99.2%" },
-            ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-cyan-400 mb-2">{stat.value}</p>
-                <p className="text-gray-400 text-sm">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -197,10 +212,13 @@ export default function Home() {
           <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-violet-600 rounded-full filter blur-3xl opacity-20"></div>
         </div>
         <div className="relative max-w-4xl mx-auto px-4 text-center space-y-8">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">Ready to secure your digital world?</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold text-white">
+            Ready to secure your digital world?
+          </h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Join thousands of organizations protecting themselves with CyberRakshak. Report incidents, get expert help, and
-            respond faster than ever before.
+            Join thousands of organizations protecting themselves with
+            CyberRakshak. Report incidents, get expert help, and respond faster
+            than ever before.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/report">
@@ -213,5 +231,5 @@ export default function Home() {
         </div>
       </section>
     </main>
-  )
+  );
 }

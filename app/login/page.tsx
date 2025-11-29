@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { useAuth } from "@/lib/auth-context"
-import { ShieldAlert } from "lucide-react"
+import { Shield, ShieldAlert } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function LoginPage() {
@@ -64,7 +64,7 @@ export default function LoginPage() {
             <div className="text-center space-y-3">
               <div className="flex justify-center">
                 <div className="bg-gradient-to-br from-cyan-500/20 to-violet-500/20 p-3 rounded-xl">
-                  <ShieldAlert className="w-6 h-6 text-cyan-400" />
+                  <Shield className="w-6 h-6 text-cyan-400" />
                 </div>
               </div>
               <h1 className="text-3xl font-bold text-white">Welcome to CyberRakshak</h1>
@@ -124,7 +124,7 @@ export default function LoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder={role === "user" ? "user@CyberRakshak.com" : "officer@CyberRakshak.com"}
+                  placeholder={role === "user" ? "user@cyberrakshak.com" : "officer@cyberrakshak.com"}
                   required
                   className="w-full bg-slate-700/50 border border-slate-600/50 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                 />
@@ -185,7 +185,7 @@ export default function LoginPage() {
             <div className="border-t border-slate-700/50 pt-4 space-y-2">
               <p className="text-xs text-slate-500 text-center">Demo Credentials:</p>
               <p className="text-xs text-slate-500 text-center">
-                {role === "user" ? "user@CyberRakshak.com / password123" : "officer@CyberRakshak.com / officer123"}
+                {role === "user" ? "user@cyberrakshak.com / password123" : "officer@cyberrakshak.com / officer123"}
               </p>
             </div>
           </div>

@@ -1,16 +1,17 @@
-"use client"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+"use client";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Bot } from "lucide-react";
 
 interface AiAssessmentResultProps {
-  priority: "low" | "medium" | "high"
-  impactScore: number
-  summary: string
-  actions: string[]
-  incidentId?: string
-  onSaveAndContinue?: () => void
-  isModal?: boolean
+  priority: "low" | "medium" | "high";
+  impactScore: number;
+  summary: string;
+  actions: string[];
+  incidentId?: string;
+  onSaveAndContinue?: () => void;
+  isModal?: boolean;
 }
 
 export default function AiAssessmentResult({
@@ -31,7 +32,7 @@ export default function AiAssessmentResult({
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -40,7 +41,7 @@ export default function AiAssessmentResult({
       y: 0,
       transition: { duration: 0.5, ease: "easeOut" },
     },
-  }
+  };
 
   const priorityConfig = {
     low: {
@@ -67,19 +68,23 @@ export default function AiAssessmentResult({
       badge: "bg-red-500/20 text-red-300",
       label: "High Priority",
     },
-  }
+  };
 
-  const config = priorityConfig[priority]
+  const config = priorityConfig[priority];
 
-  const containerClass = isModal ? "max-w-2xl" : "max-w-4xl"
-  const paddingClass = isModal ? "p-8 sm:p-12" : "px-4 py-12 sm:py-16"
+  const containerClass = isModal ? "max-w-2xl" : "max-w-4xl";
+  const paddingClass = isModal ? "p-8 sm:p-12" : "px-4 py-12 sm:py-16";
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className={`${!isModal && "min-h-screen"} bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center ${!isModal && "pt-24 pb-12"}`}
+      className={`${
+        !isModal && "min-h-screen"
+      } bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center ${
+        !isModal && "pt-24 pb-12"
+      }`}
     >
       <motion.div
         variants={containerVariants}
@@ -91,52 +96,65 @@ export default function AiAssessmentResult({
         <motion.div variants={itemVariants} className="text-center space-y-4">
           <div className="flex justify-center gap-4 mb-6">
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-              className="text-4xl"
-            >
-              🛡️
-            </motion.div>
-            <motion.div
               animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+              transition={{
+                duration: 3,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+              }}
               className="text-4xl"
             >
-              🤖
-            </motion.div>
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-              className="text-4xl"
-            >
-              ⚡
+              <Bot />
             </motion.div>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-bold text-white">AI Incident Assessment Report</h1>
-          <p className="text-slate-400 text-lg">Based on your report, here's what our AI analysis found.</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-white">
+            AI Incident Assessment Report
+          </h1>
+          <p className="text-slate-400 text-lg">
+            Based on your report, here's what our AI analysis found.
+          </p>
         </motion.div>
 
         {/* Priority Card with Glow */}
-        <motion.div variants={itemVariants} className={`relative bg-gradient-to-br ${config.color} p-1 rounded-2xl`}>
+        <motion.div
+          variants={itemVariants}
+          className={`relative bg-gradient-to-br ${config.color} p-1 rounded-2xl`}
+        >
           {/* Glow effect */}
-          <div className={`absolute inset-0 ${config.bgGlow} rounded-2xl blur-3xl -z-10`} />
+          <div
+            className={`absolute inset-0 ${config.bgGlow} rounded-2xl blur-3xl -z-10`}
+          />
 
           <div className={`bg-slate-900 rounded-2xl p-8 text-center space-y-4`}>
             <motion.div
               animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+              transition={{
+                duration: 2,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+              }}
             >
-              <p className={`text-sm font-semibold uppercase tracking-widest ${config.badge}`}>{config.label}</p>
+              <p
+                className={`text-sm font-semibold uppercase tracking-widest ${config.badge}`}
+              >
+                {config.label}
+              </p>
               <h2
                 className={`text-6xl sm:text-7xl font-black bg-gradient-to-r ${config.color} bg-clip-text text-transparent mt-2`}
               >
-                {priority === "high" ? "🔴" : priority === "medium" ? "🟡" : "🟢"}
+                {priority === "high"
+                  ? "🔴"
+                  : priority === "medium"
+                  ? "🟡"
+                  : "🟢"}
               </h2>
             </motion.div>
 
             <div className="space-y-2 pt-4 border-t border-slate-700">
-              <p className="text-slate-400 text-sm uppercase tracking-wider">Impact Score</p>
+              <p className="text-slate-400 text-sm uppercase tracking-wider">
+                Impact Score
+              </p>
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
@@ -189,7 +207,11 @@ export default function AiAssessmentResult({
                 <div className="flex gap-4 items-start">
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: index * 0.2 }}
+                    transition={{
+                      duration: 2,
+                      repeat: Number.POSITIVE_INFINITY,
+                      delay: index * 0.2,
+                    }}
                     className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-cyan-400 to-violet-500 rounded-full flex items-center justify-center text-slate-950 font-bold text-sm"
                   >
                     {index + 1}
@@ -208,13 +230,22 @@ export default function AiAssessmentResult({
           variants={itemVariants}
           className="bg-gradient-to-r from-cyan-500/10 to-violet-500/10 border border-cyan-400/30 rounded-lg p-6 space-y-3"
         >
-          <p className="text-xs font-semibold text-cyan-300 uppercase tracking-widest">Incident Reference ID</p>
-          <p className="text-2xl font-mono font-bold text-cyan-400">{incidentId}</p>
-          <p className="text-sm text-slate-400">Save this reference for tracking and follow-ups.</p>
+          <p className="text-xs font-semibold text-cyan-300 uppercase tracking-widest">
+            Incident Reference ID
+          </p>
+          <p className="text-2xl font-mono font-bold text-cyan-400">
+            {incidentId}
+          </p>
+          <p className="text-sm text-slate-400">
+            Save this reference for tracking and follow-ups.
+          </p>
         </motion.div>
 
         {/* Powered by AI Footer */}
-        <motion.div variants={itemVariants} className="text-center pt-4 border-t border-slate-700">
+        <motion.div
+          variants={itemVariants}
+          className="text-center pt-4 border-t border-slate-700"
+        >
           <p className="text-xs text-slate-500 flex items-center justify-center gap-2">
             <span className="inline-block w-1 h-1 bg-slate-500 rounded-full" />
             Powered by Advanced AI Analysis
@@ -223,7 +254,10 @@ export default function AiAssessmentResult({
         </motion.div>
 
         {/* Action Buttons */}
-        <motion.div variants={itemVariants} className="flex gap-4 pt-6 border-t border-slate-700">
+        <motion.div
+          variants={itemVariants}
+          className="flex gap-4 pt-6 border-t border-slate-700"
+        >
           <Link href="/user-dashboard" className="flex-1">
             <Button className="w-full bg-gradient-to-r from-cyan-400 to-cyan-500 hover:from-cyan-300 hover:to-cyan-400 text-slate-950 font-semibold glow-cyan">
               Save & Continue to Dashboard
@@ -231,7 +265,10 @@ export default function AiAssessmentResult({
           </Link>
 
           <Link href="/report" className="flex-1">
-            <Button variant="outline" className="w-full bg-slate-700 hover:bg-slate-600 text-white border-slate-600">
+            <Button
+              variant="outline"
+              className="w-full bg-slate-700 hover:bg-slate-600 text-white border-slate-600"
+            >
               Report Another
             </Button>
           </Link>
@@ -253,13 +290,13 @@ Recommended Actions:
 ${actions.map((a, i) => `${i + 1}. ${a}`).join("\n")}
 
 Report generated on: ${new Date().toLocaleString()}
-              `
-              const blob = new Blob([content], { type: "text/plain" })
-              const url = window.URL.createObjectURL(blob)
-              const a = document.createElement("a")
-              a.href = url
-              a.download = `${incidentId}-assessment.txt`
-              a.click()
+              `;
+              const blob = new Blob([content], { type: "text/plain" });
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = `${incidentId}-assessment.txt`;
+              a.click();
             }}
           >
             Download
@@ -267,5 +304,5 @@ Report generated on: ${new Date().toLocaleString()}
         </motion.div>
       </motion.div>
     </motion.div>
-  )
+  );
 }

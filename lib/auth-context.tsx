@@ -24,22 +24,22 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 // Mock user database
 const MOCK_USERS: Record<string, { password: string; user: User }> = {
-  "user@CyberRakshak.com": {
+  "user@cyberrakshak.com": {
     password: "password123",
     user: {
       id: "user-1",
-      email: "user@CyberRakshak.com",
-      fullName: "John Citizen",
+      email: "user@cyberrakshak.com",
+      fullName: "Citizen",
       role: "user",
       createdAt: new Date().toISOString(),
     },
   },
-  "officer@CyberRakshak.com": {
+  "officer@cyberrakshak.com": {
     password: "officer123",
     user: {
       id: "officer-1",
-      email: "officer@CyberRakshak.com",
-      fullName: "Jane Officer",
+      email: "officer@cyberrakshak.com",
+      fullName: "Officer",
       role: "officer",
       createdAt: new Date().toISOString(),
     },

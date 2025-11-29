@@ -75,9 +75,6 @@ export default function ReportIncidentPage(): ReactElement {
     },
   });
 
-  if (!user) {
-    router.push("/login");
-  }
   const confirmAccuracy = watch("confirmAccuracy");
 
   React.useEffect(() => {
@@ -103,15 +100,6 @@ export default function ReportIncidentPage(): ReactElement {
     };
     localStorage.setItem("cyberaid-form-draft", JSON.stringify(toSave));
   }, [formData]);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newFiles = e.currentTarget.files;
-    if (newFiles) {
-      const addedFiles = Array.from(newFiles);
-      setFiles((prev) => [...prev, ...addedFiles]);
-    }
-    e.currentTarget.value = "";
-  };
 
   const removeFile = (index: number) => {
     setFiles((prev) => prev.filter((_, i) => i !== index));
@@ -148,101 +136,81 @@ export default function ReportIncidentPage(): ReactElement {
     }
   };
 
-  const confirmSubmission = () => {
-    const formValues = watch();
-    const incident = {
-      id: `INC-${Date.now()}-${Math.random()
-        .toString(36)
-        .substr(2, 9)
-        .toUpperCase()}`,
-      created_at: new Date().toISOString(),
-      ...formValues,
-      fileCount: files.length,
-    };
+  const confirmSubmission = async () => {
+    try {
+      const formValues = watch();
 
-    const incidents = JSON.parse(localStorage.getItem("incidents") || "[]");
-    incidents.push(incident);
-    localStorage.setItem("incidents", JSON.stringify(incidents));
+      // Prepare JSON payload
+      const payload = {
+        fullName: formValues.fullName,
+        email: formValues.email,
+        contactNumber: formValues.contactNumber || "",
+        address: formValues.address,
+        incidentTitle: formValues.incidentTitle,
+        incidentType: formValues.incidentType,
+        incidentDate: formValues.incidentDate,
+        description: formValues.description,
+        fileCount: files.length,
+        userId: user?.id || null,
+      };
 
-    localStorage.removeItem("cyberaid-form-draft");
+      console.log(payload);
 
-    const incidentType = formValues.incidentType;
-    let priority: "low" | "medium" | "high" = "medium";
-    let impactScore = 65;
-    let summary = "";
-    let actions: string[] = [];
+      // Make API call to backend
+      const response = await fetch("/api/mitigation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.id || ""}`,
+        },
+        body: JSON.stringify({
+          fullName: payload.fullName,
+          payload: payload.email,
+          address: payload.address,
+          incidentTitle: payload.incidentTitle,
+          incidentType: payload.incidentType,
+          incidentDate: payload.incidentDate,
+          description: payload.description,
+        }),
+      });
 
-    if (incidentType === "phishing") {
-      priority = "high";
-      impactScore = 78;
-      summary =
-        "Our analysis indicates this is a sophisticated phishing attempt with potential credential exposure. The incident shows signs of social engineering targeting email accounts. Immediate action is recommended to prevent unauthorized access.";
-      actions = [
-        "Change all affected passwords immediately, prioritizing email and financial accounts",
-        "Run a full antivirus/malware scan on your device",
-        "Check account activity logs for unauthorized access attempts",
-        "Contact your IT department and report the phishing attempt",
-        "Enable two-factor authentication on all critical accounts",
-      ];
-    } else if (incidentType === "malware") {
-      priority = "high";
-      impactScore = 82;
-      summary =
-        "Malware detection indicates a potential system compromise. The detected malware could allow unauthorized access to your personal data. Immediate isolation and professional remediation is strongly recommended.";
-      actions = [
-        "Immediately disconnect the affected device from the network",
-        "Run updated antivirus/anti-malware software in safe mode",
-        "Consider professional IT support for complete system cleanup",
-        "Change passwords from a secure device",
-        "Monitor your accounts for suspicious activity",
-      ];
-    } else if (incidentType === "data-breach") {
-      priority = "high";
-      impactScore = 85;
-      summary =
-        "Analysis suggests potential exposure of sensitive personal data. Your information may have been accessed during this breach. We recommend immediate protective measures.";
-      actions = [
-        "Contact the affected service and request security audit",
-        "Change passwords for all accounts using the breached service",
-        "Monitor credit reports and bank statements for fraud",
-        "Consider placing a fraud alert with credit agencies",
-        "Document all communications about the breach",
-      ];
-    } else if (incidentType === "ransomware") {
-      priority = "high";
-      impactScore = 95;
-      summary =
-        "Critical ransomware infection detected. This represents the highest level of threat to your system and data. Professional IT support is essential.";
-      actions = [
-        "Disconnect infected device from network immediately",
-        "Contact IT support and cybersecurity professionals urgently",
-        "Do not pay ransom - contact law enforcement",
-        "Restore from clean backups if available",
-        "Preserve evidence for law enforcement investigation",
-      ];
-    } else {
-      priority = "medium";
-      impactScore = 55;
-      summary =
-        "We've analyzed your incident report and classified it as a moderate-priority security concern. While not immediately critical, it warrants attention to prevent escalation.";
-      actions = [
-        "Document all details of the incident for your records",
-        "Monitor relevant systems for any unusual activity",
-        "Review your security practices to prevent similar incidents",
-        "Keep your software and systems updated",
-        "Report to relevant authorities if applicable",
-      ];
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
+      }
+
+      const result = await response.json();
+
+      console.log(result);
+
+      if (result) {
+        // Clear draft from localStorage
+        localStorage.removeItem("cyberaid-form-draft");
+
+        setAiAssessmentData({
+          priority: result.data.assessment.label || "medium",
+          impactScore: result.data.assessment.impactScore || 65,
+          summary: result.data.assessment.summary || "Your incident has been analyzed.",
+          actions: result.data.assessment.actions || [],
+          incidentId: result.data.incidentId || "INC01",
+        });
+
+        setShowConfirmModal(false);
+        setShowAiAssessment(true);
+      } else {
+        throw new Error(result.message || "Failed to submit incident");
+      }
+    } catch (error) {
+      console.error("Error submitting incident:", error);
+      alert(
+        `Failed to submit incident: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      );
+      setShowConfirmModal(false);
     }
-
-    setAiAssessmentData({
-      priority,
-      impactScore,
-      summary,
-      actions,
-      incidentId: incident.id,
-    });
-    setShowConfirmModal(false);
-    setShowAiAssessment(true);
   };
 
   if (showAiAssessment && aiAssessmentData) {
@@ -624,7 +592,6 @@ export default function ReportIncidentPage(): ReactElement {
                     <input
                       type="file"
                       multiple
-                      onChange={handleFileChange}
                       className="hidden"
                       id="file-input"
                       accept="image/*,.pdf,.txt,.log,.json,.csv"
