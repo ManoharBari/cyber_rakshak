@@ -127,7 +127,7 @@ ${JSON.stringify(incident, null, 2)}
       // encrypted fields
       description: encrypt(description),
       summary: encrypt(summary),
-      actions: encrypt(JSON.stringify(mitigation_steps)),
+      actions: mitigation_steps.map((step) => encrypt(step)),
       reported_by: encrypt(fullName),
       email: encrypt(email),
       location: encrypt(address),
