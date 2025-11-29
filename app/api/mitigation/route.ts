@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
+import { supabase } from "@/lib/supabase";
+import { encrypt } from "@/lib/crypto";
 
-// --- Gemini Client Setup (same style as your reference code) ---
+// Gemini Client Setup
 const GEMINI_KEY = process.env.GEMINI_API_KEY;
 if (!GEMINI_KEY) throw new Error("GEMINI_API_KEY not set in env");
 
@@ -39,7 +41,7 @@ export async function POST(req: Request) {
       location: address,
     };
 
-    // --- System-Style Instruction (same as your generateJsonFromPrompt structure) ---
+    // System-Style Instruction
     const systemPrompt = `
 You are a cybersecurity incident analyst.
 
@@ -62,7 +64,7 @@ Incident Details:
 ${JSON.stringify(incident, null, 2)}
 `;
 
-    // --- Gemini Call (new API style) ---
+    // Gemini Call
     const result = await genAI.models.generateContent({
       model: "gemini-2.5-flash",
       contents: systemPrompt,
@@ -76,7 +78,7 @@ ${JSON.stringify(incident, null, 2)}
       );
     }
 
-    // --- Extract JSON Safely (same style as your reference function) ---
+    // Extract JSON Safely
     let parsed;
     try {
       parsed = JSON.parse(raw);
@@ -105,11 +107,39 @@ ${JSON.stringify(incident, null, 2)}
     if (impact_score > 75) label = "high";
     else if (impact_score > 40) label = "medium";
 
-    // --- Generate Incident ID ---
+    // Unique Incident ID
     const incidentId = `INC-${Date.now()}-${Math.random()
       .toString(36)
       .substring(2, 8)
       .toUpperCase()}`;
+
+    // INSERT INTO DB WITH ENCRYPTION
+    const { error } = await supabase.from("incidents").insert({
+      incident_id: incidentId,
+
+      // plaintext
+      title: incidentTitle,
+      type: incidentType,
+      date: incidentDate,
+      impact_score,
+      label,
+
+      // encrypted fields
+      description: encrypt(description),
+      summary: encrypt(summary),
+      actions: encrypt(JSON.stringify(mitigation_steps)),
+      reported_by: encrypt(fullName),
+      email: encrypt(email),
+      location: encrypt(address),
+    });
+
+    if (error) {
+      console.error("DB Error:", error);
+      return NextResponse.json(
+        { success: false, error: "Database insert failed" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
